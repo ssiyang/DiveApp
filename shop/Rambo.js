@@ -43,7 +43,7 @@ export default class rambo extends Component<Props> {
                   <Image style={{width :Dimensions.get('window').width, height: height * 0.3}} source={require('./img/view2.jpg')} />
                   <Image style={{width :Dimensions.get('window').width, height: height * 0.3}} source={require('./img/view3.jpg')} />
                 </Swiper>
-
+                
                 <Hr align="left"><Text style={styles.subtitle}>店家介紹</Text></Hr>
                 <Text style={styles.textView}>
                 水肺充氣、潛水訓練召生、進階訓練召生、潛水器材選購専業潛水船(藍波八號) 、專營體驗潛水,潛水教學,器材維修,水底工程,攝影 、水肺充氣,器材販售，歡迎來店參觀選購

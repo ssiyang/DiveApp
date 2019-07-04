@@ -9,10 +9,20 @@ import {
     TouchableHighlight,
     Dimensions,
     Linking,
+    Button
 } from 'react-native';
 import Hr from '@genesy/react-native-hr'
+import MapView from 'react-native-maps';
+import { Marker } from 'react-native-maps';
 
-export default class Yehliu extends Component<Props> {
+const Space = {
+  latitude: 25.206375,
+  longitude: 121.690234,
+  latitudeDelta: 0.005,
+  longitudeDelta: 0.005,
+};
+
+export default class Yehliu extends Component {
     static navigationOptions = {
       title: '野柳',
       headerStyle: {
@@ -29,6 +39,20 @@ export default class Yehliu extends Component<Props> {
         (<Image style={{width:30, height:20}} source={require('../img/12.png')} />),
       headerRightContainerStyle: {padding: 10}
     };
+
+    constructor(props) {
+      super(props);
+      this.state = {
+        region : null
+      };
+    }
+
+    handlePress = () => {
+      this.setState({
+        region : Space
+      });
+    }
+
     render() {
         const { navigate } = this.props.navigation;
 
@@ -46,6 +70,26 @@ export default class Yehliu extends Component<Props> {
                 <Text style={styles.textView}>
                   野柳海域的潛點大多集中在野柳風景區內與右側九孔池周遭；欲於風景區內從事活動的潛水員必須在停車場換穿裝備，整裝後由管理處購票入內，接著須步行一大段路。此區域較富盛名的潛點為〝三塊石〞，可以從土地公廟旁或者從漁港邊入水，此海域是由多塊礁岩組成的景點，最大深度約21米左右，有大量的石珊瑚和海綿。此海域在漲退潮時海流強勁，應特別注意。
                 </Text>
+
+                <Hr align="left"><Text style={styles.subtitle}>地圖位置</Text></Hr>
+                <View style={{height: 300}}>
+                  <MapView
+                    style={{flex: 1}}
+                    initialRegion={{
+                      latitude: 25.206375,
+                      longitude: 121.690234,
+                      latitudeDelta: 0.005,
+                      longitudeDelta: 0.005,
+                    }}
+                    region = {this.state.region}
+                  >
+                  <Marker
+                    coordinate={{latitude:25.206375, longitude:121.690234}}
+                  />
+                  </MapView>
+                  <Button title='返回位置' onPress={this.handlePress} />
+
+                </View>
 
                 <Hr align="left"><Text style={styles.subtitle}>潛店推薦</Text></Hr>
 

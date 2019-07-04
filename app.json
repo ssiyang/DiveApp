@@ -25,6 +25,16 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+
+    "android": {
+    "package": "com.DiveApp",
+    "config": {
+      "googleMaps": {
+        "apiKey": "AIzaSyAq0g-AFyCKRvdaRLCsYZ2aqyEIgqhF3hE"
+      }
     }
+    }
+    
   }
 }

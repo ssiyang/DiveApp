@@ -9,47 +9,73 @@ import {
     TouchableHighlight,
     Dimensions,
     Linking,
-    Button
+    Button,
+    Alert,
 } from 'react-native';
 import Hr from '@genesy/react-native-hr'
 import MapView from 'react-native-maps';
 import { Marker } from 'react-native-maps';
 
-const Space = {
-  latitude: 25.206375,
-  longitude: 121.690234,
-  latitudeDelta: 0.005,
-  longitudeDelta: 0.005,
-};
+// const Space = {
+//   latitude: 25.206375,
+//   longitude: 121.690234,
+//   latitudeDelta: 0.005,
+//   longitudeDelta: 0.005,
+// };
 
-export default class Yehliu extends Component {
-    static navigationOptions = {
-      title: '野柳',
-      headerStyle: {
-        backgroundColor : '#3FD2FF'
-      },
-      headerTitleStyle : {
-        flex : 1,
-        fontFamily: 'monospace',
-        fontSize: 20,
-        textAlign: 'center',
-        color: '#FFFFFF'
-      },
-      headerRight:
-        (<Image style={{width:30, height:20}} source={require('../img/12.png')} />),
-      headerRightContainerStyle: {padding: 10}
+// const Space = {
+//   latitude: this.props.navigation.state.params.item.latitude,
+//   longitude: this.props.navigation.state.params.item.longitude,
+//   latitudeDelta: this.props.navigation.state.params.item.latitudeDelta,
+//   longitudeDelta: this.props.navigation.state.params.item.longitudeDelta,
+// };
+
+
+
+export default class ViewResult extends Component {
+
+  // const name = this.props.navigation.state.params.item.name;
+
+
+
+//   navigationOptions: ({ navigation }) => ({
+//   title: ${navigation.state.params.name},
+// })
+
+  static navigationOptions = {
+
+    headerStyle: {
+      backgroundColor : '#3FD2FF'
+    },
+    headerTitleStyle : {
+      flex : 1,
+      fontFamily: 'monospace',
+      fontSize: 20,
+      textAlign: 'center',
+      color: '#FFFFFF'
+    },
+    headerRight:
+      (<Image style={{width:30, height:20}} source={require('./img/12.png')} />),
+    headerRightContainerStyle: {padding: 10}
+  };
+
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      region : null
     };
+  }
 
-    constructor(props) {
-      super(props);
-      this.state = {
-        region : null
-      };
-    }
 
     handlePress = () => {
       this.setState({
-        region : Space
+        region : {
+          latitude: this.props.navigation.state.params.item.latitude,
+          longitude: this.props.navigation.state.params.item.longitude,
+          latitudeDelta: this.props.navigation.state.params.item.latitudeDelta,
+          longitudeDelta: this.props.navigation.state.params.item.longitudeDelta,
+        }
       });
     }
 
@@ -60,9 +86,9 @@ export default class Yehliu extends Component {
             <ScrollView style={styles.container}>
                   <Hr align="left"><Text style={styles.subtitle}>實景照片</Text></Hr>
                 <ScrollView contentContainerStyle={styles.piccontainer} horizontal={true} showsHorizontalScrollIndicator={false}>
-                  <Image style={styles.picsize} source={require('../img/view1.jpg')} />
-                  <Image style={styles.picsize} source={require('../img/view2.jpg')} />
-                  <Image style={styles.lastpicsize} source={require('../img/view3.jpg')} />
+                  <Image style={styles.picsize} source={require('./img/view1.jpg')} />
+                  <Image style={styles.picsize} source={require('./img/view2.jpg')} />
+                  <Image style={styles.lastpicsize} source={require('./img/view3.jpg')} />
                 </ScrollView>
 
                 <Hr align="left"><Text style={styles.subtitle}>潛點介紹</Text></Hr>
@@ -76,15 +102,15 @@ export default class Yehliu extends Component {
                   <MapView
                     style={{flex: 1}}
                     initialRegion={{
-                      latitude: 25.206375,
-                      longitude: 121.690234,
-                      latitudeDelta: 0.005,
-                      longitudeDelta: 0.005,
+                      latitude: this.props.navigation.state.params.item.latitude,
+                      longitude: this.props.navigation.state.params.item.longitude,
+                      latitudeDelta: this.props.navigation.state.params.item.latitudeDelta,
+                      longitudeDelta: this.props.navigation.state.params.item.longitudeDelta,
                     }}
                     region = {this.state.region}
                   >
                   <Marker
-                    coordinate={{latitude:25.206375, longitude:121.690234}}
+                    coordinate={{latitude:this.props.navigation.state.params.item.latitude, longitude:this.props.navigation.state.params.item.longitude}}
                   />
                   </MapView>
                   <Button title='返回位置' onPress={this.handlePress} />
@@ -96,16 +122,16 @@ export default class Yehliu extends Component {
                 <ScrollView contentContainerStyle={styles.piccontainer} horizontal={true} showsHorizontalScrollIndicator={false}>
                   <TouchableHighlight underlayColor='gray' onPress={()=>{navigate('Rambo');}}>
                   <View>
-                  <Image style={styles.picsize} source={require('../img/view1.jpg')} />
+                  <Image style={styles.picsize} source={require('./img/view1.jpg')} />
                   <Text style={styles.imgtxt}>88潛水俱樂部</Text>
                   </View>
                   </TouchableHighlight>
                   <View>
-                  <Image style={styles.picsize} source={require('../img/view2.jpg')} />
+                  <Image style={styles.picsize} source={require('./img/view2.jpg')} />
                   <Text style={styles.imgtxt}>88潛水俱樂部</Text>
                   </View>
                   <View>
-                  <Image style={styles.lastpicsize} source={require('../img/view3.jpg')} />
+                  <Image style={styles.lastpicsize} source={require('./img/view3.jpg')} />
                   <Text style={styles.imgtxt}>88潛水俱樂部</Text>
                   </View>
                 </ScrollView>
